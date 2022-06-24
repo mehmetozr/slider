@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mo_Slider</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <style>
+        .mo__slider {
+            width: 1280px;
+            height: 500px;
+            position: relative;
+
+        }
+
+        .mo__slider__image-container {
+            width: 100%;
+            height: 100%;
+
+        }
+
+        .mo__slider__image-container img {
+            border-radius: 3px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+        }
+
+
+        .mo__slider__arrow {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 6px;
+            background-color: rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+            color: white;
+            height: 40px;
+            width: 40px;
+            font-size: 25px;
+            top: calc(50% - 20px);
+        }
+
+        .mo__slider__arrow:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .mo__slider__arrow_right {
+            right: 20px;
+        }
+
+        .mo__slider__arrow_left {
+            left: 20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="mo__slider">
+        <div class="mo__slider__image-container">
+            <img src="img/s1.jpg">
+            <img src="img/s2.jpg">
+            <img src="img/s3.jpg">
+            <img src="img/s4.jpg">
+            <img src="img/s5.jpg">
+            <img src="img/s6.jpg">
+            <img src="img/s7.jpg">
+        </div>
+        <div class="mo__slider__arrow-container">
+            <div class="mo__slider__arrow mo__slider__arrow_right"><i class="fas fa-arrow-circle-right"></i></div>
+            <div class="mo__slider__arrow mo__slider__arrow_left"><i class="fas fa-arrow-circle-left"></i></div>
+        </div>
+        <div class="mo__slider__bottom-link-container">
+
+        </div>
+
+    </d
+    iv>
+
+
+    <script>
+        var sliders = [];
+
+        $(document).ready(function() {
+
+            $.each($(".mo__slider"), function(indexInArray, item) {
+                sliders.push($(item).moSlider());
+            });
+
+
+        });
+
+
+        $.fn.moSlider = function() {
+
+
+            var lastIndex = 1
+            $(this).find("img").hide();
+            $(this).find("img:first-child").show();
+
+            $(this).find(".mo__slider__arrow_right").on("click", (e) => {
+                //debugger;
+                var maxIndex = $(this).find('img').length
+
+                if (lastIndex < maxIndex) {
+                    lastIndex++
+                    $(this).find('img').hide()
+                    $(this).find('img:nth-child(' + lastIndex + ')').show()
+                    console.log(lastIndex)
+
+                }
+
+            });
+            $(this).find(".mo__slider__arrow_left").on("click", (e) => {
+                //debugger;
+                var maxIndex = $(this).find('img').length
+
+                if (lastIndex > 1 && lastIndex <= maxIndex) {
+                    lastIndex--
+                    $(this).find('img').hide()
+                    $(this).find('img:nth-child(' + lastIndex + ')').show()
+                    console.log(lastIndex)
+                }
+            })
+
+            this.getIndex = function() {
+                return lastIndex;
+            }
+
+
+            return this;
+
+        };
+
+    </script>
+
+</body>
+
+</html>
